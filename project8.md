@@ -21,3 +21,36 @@ One RHEL8 NFS server
 
 ![image](prerequisites-project8.png)
 
+1. Lunch an EC2 Ubuntu 20.04 Instance to be used as the **Apache Load Balancer**
+
+So you should have these Instances running:
+
+![](project8-instances.jpg)
+
+2. Open TCP port 80 on Project-8-apache-lb by creating an Inbound Rule in Security Group.
+3. Install Apache Load Balancer on Project-8-apache-lb server and configure it to point traffic coming to LB to both Web Servers
+
+~~~
+sudo apt update
+sudo apt install apache2 -y
+sudo apt-get install libxml2-dev
+
+#Enable following modules:
+sudo a2enmod rewrite
+sudo a2enmod proxy
+sudo a2enmod proxy_balancer
+sudo a2enmod proxy_http
+sudo a2enmod headers
+sudo a2enmod lbmethod_bytraffic
+~~~
+#Restart apache2 service
+~~~
+sudo systemctl restart apache2
+~~~
+Enable apache2 service to run when the server is restarted 
+~~~
+sudo systemctl enable apache2
+~~~
+
+
+
