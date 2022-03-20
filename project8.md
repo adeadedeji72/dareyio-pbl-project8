@@ -84,4 +84,33 @@ sudo tail -f /var/log/httpd/access_log
 ~~~
 You should see GET requests to the servers. Try accessing the webpage through the LB's address
 
+![](access-log.jpg)
+
+We can use local name resolution to configure our LB instead of the Private IP addresses.
+We will edit the /etc/hosts file on the LB
+~~~
+sudo vi /etc/hosts
+~~~
+
+Add these two lines
+~~~
+<WebServer1-Private-IP-Address> Web1
+<WebServer2-Private-IP-Address> Web2
+~~~
+
+Edit LB configuration file
+~~~
+sudo vi /etc/apache2/sites-available/000-default.conf
+~~~
+~~~
+BalancerMember http://Web1:80 loadfactor=5 timeout=1
+BalancerMember http://Web2:80 loadfactor=5 timeout=1
+~~~
+
+Open the tooling webpage again. If it displays the page, it means the changes are valid. 
+
+### **CONGRATULATIONS** ### 
+
+
+
 
