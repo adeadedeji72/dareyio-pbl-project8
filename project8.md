@@ -72,5 +72,16 @@ http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php
 
 ![](lb-display.jpg)
 
+To observe the traffic to the Web Servers, detach the /var/log/httpd from the NFS (on the two web servers)
+~~~
+sudo umount -l /var/log/httpd
+~~~
+Restart apache2
+
+The check the httpd access log from the two Web Server
+~~~
+sudo tail -f /var/log/httpd/access_log
+~~~
+You should see GET requests to the servers. Try accessing the webpage through the LB's address
 
 
