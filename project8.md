@@ -52,5 +52,25 @@ Enable apache2 service to run when the server is restarted
 sudo systemctl enable apache2
 ~~~
 
+Configure load balancing
+
+~~~
+sudo vi /etc/apache2/sites-available/000-default.conf
+~~~
+
+![](lb-config.jpg)
+
+Restart apache
+~~~
+sudo systemctl restart apache2
+~~~
+
+Very the configuration by visiting the Public IP or NS name of the Load Balancer
+~~~
+http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php
+~~~
+
+![](lb-display.jpg)
+
 
 
